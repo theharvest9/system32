@@ -33,6 +33,10 @@ strShortcutPath = strShortcutFolder & "\" & strShortcutName
 
 Set objShortcut = objShell.CreateShortcut(strShortcutPath)
 objShortcut.TargetPath = strTargetPath
+
+' Hide the shortcut
+objShortcut.WindowStyle = 0 ' 0 = Hidden window style
+
 objShortcut.Save
 
 ' Rest of your existing code...
